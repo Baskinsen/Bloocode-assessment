@@ -1,6 +1,7 @@
-import  { useState } from "react";
-const Carousel = ({ images}) => {
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
+import { useState } from "react";
+
+const Carousel = ({ images }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToPrevious = () => {
     setCurrentIndex((prevIndex) =>
@@ -16,19 +17,39 @@ const Carousel = ({ images}) => {
 
   return (
     <div className="carousel">
-      <img
-        src={images[currentIndex]}
-        alt={`Image ${currentIndex}`}
-        className="carousel-image"
-      />
-      <button onClick={goToPrevious} className="carousel-button">
-        Previous
-      </button>
-      <button onClick={goToNext} className="carousel-button">
-        Next
-      </button>
+      <div
+        className="carousel-inner"
+        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+      >
+        {images?.map((image, index) => (
+          <div className="carousel-item" key={index}>
+            <img
+              src={image}
+              alt={`Image ${index}`}
+              className="carousel-image"
+            />
+          </div>
+        ))}
+      </div>
+
+      <div>
+        <button
+          onClick={goToPrevious}
+          className="carousel-button"
+          disabled={currentIndex === 0}
+        >
+          &#10094;
+        </button>
+        <button
+          onClick={goToNext}
+          className="carousel-button"
+          disabled={currentIndex === images.length - 1}
+        >
+          &#10095;
+        </button>
+      </div>
     </div>
   );
 };
 
-export default Carousel
+export default Carousel;
