@@ -1,6 +1,8 @@
 import Carousel from "./Carousel";
 
 const ProductModal = ({ product, onClose }) => {
+
+   
     console.log(product)
     return (
       <div className="modal">

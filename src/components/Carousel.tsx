@@ -31,8 +31,7 @@ const Carousel = ({ images }) => {
           </div>
         ))}
       </div>
-
-      <div>
+      
         <button
           onClick={goToPrevious}
           className="carousel-button"
@@ -47,7 +46,7 @@ const Carousel = ({ images }) => {
         >
           &#10095;
         </button>
-      </div>
+      
     </div>
   );
 };

@@ -1,4 +1,10 @@
-h1,h2,h3,h4,h5,h6,p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin: 0;
   padding: 0;
 }
@@ -74,10 +80,6 @@ h1 {
   padding: 20px 30px;
   gap: 5rem;
   scroll-behavior: smooth;
-}
-
-.container::-webkit-scrollbar {
-  display: none;
 }
 
 .carousel {
@@ -187,13 +189,20 @@ h1 {
 
 .close {
   cursor: pointer;
+  font-size: 50px;
+  padding: 0 10px;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
 }
 
 .modal-content {
   position: relative;
   display: grid;
   gap: 20px;
-  padding: 20px;
+  padding: 0px 0px 20px 0px;
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -204,7 +213,6 @@ h1 {
 
   & p {
     text-align: justify;
-  
   }
 }
 
@@ -216,23 +224,26 @@ h1 {
   margin: auto;
   align-items: center;
   width: 100%;
-  
+
+  & div {
+    padding: clamp(10px, 2%, 20px);
+  }
 }
 
 .modal-product-review {
   display: grid;
   gap: 20px;
+  padding: 10px;
 }
-
 
 .modal-reviews {
   display: grid;
   gap: 20px;
   width: 100%;
-  padding: 10px 10px 10px 0px;
+  padding: 10px;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-box-sizing: border-box;
+  box-sizing: border-box;
 
   & .modal-review-header {
     display: grid;
@@ -240,7 +251,6 @@ box-sizing: border-box;
     gap: 10px;
     align-items: center;
     width: 100%;
-    
   }
 
   & div {
@@ -249,22 +259,19 @@ box-sizing: border-box;
       font-size: 16px;
     }
   }
-
 }
-
 
 @media only screen and (max-width: 426px) {
-.modal-content {
-  padding: 0;
-  & div {
-    width: 100%;
+  .modal-content {
+    padding: 0;
+    & div {
+      width: 100%;
+    }
+    & p {
+      text-align: justify;
+      font-size: 14px;
+    }
   }
-  & p {
-    text-align: justify;
-    font-size: 14px;
-  }
-}
-
 
   .modal-reviews {
     & .modal-review-header {
@@ -274,5 +281,4 @@ box-sizing: border-box;
       align-items: center;
     }
   }
-
 }
