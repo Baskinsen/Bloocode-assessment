@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import Carousel from "./components/Carousel";
 import Modal from "./components/ProductModal";
+import AOS from "aos";
+import 'aos/dist/aos.css'
+
 import "./App.css";
 
 interface Product {
@@ -33,6 +36,7 @@ function App() {
   const [modal, setModal] = useState<boolean>(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   useEffect(() => {
+    AOS.init();
     const fetchData = async () => {
       fetch("https://dummyjson.com/products")
         .then((res) => res.json())
@@ -134,11 +138,22 @@ function App() {
           <h1>Products</h1>
           <div className="container">
             {filteredProducts.map((product: Product) => (
-              <div className="product" key={product.id} onClick={() => openModal(product)}>
+              <div
+                className="product"
+                data-aos="fade-up"
+                data-aos-offset="100"
+                data-aos-duration="500"
+                key={product.id}
+                onClick={() => openModal(product)}
+              >
                 <Carousel images={product.images} />
                 <h3>{product.title}</h3>
-                <p>{product.description}</p>
-                <p>${product.price}</p>
+                <p data-aos="fade-up" data-aos-offset="0" data-aos-duration="1500">
+                  {product.description}
+                </p>
+                <p>
+                  ${product.price}
+                </p>
               </div>
             ))}
           </div>
