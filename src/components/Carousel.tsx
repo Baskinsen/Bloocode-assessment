@@ -1,6 +1,11 @@
 import { useState } from "react";
 
-const Carousel = ({ images }) => {
+interface Images {
+  images: string[];
+
+}
+
+const Carousel = ({ images }: Images) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToPrevious = () => {

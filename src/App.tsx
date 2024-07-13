@@ -5,6 +5,7 @@ import AOS from "aos";
 import 'aos/dist/aos.css'
 
 import "./App.css";
+import Quantity from "./components/Quantity";
 
 interface Product {
   id: number;
@@ -97,13 +98,18 @@ function App() {
     setCategories(["All", ...uniqueCategories]);
   };
 
-  const openModal = (product: Product) => {
+  const openModal = (
+    product: Product
+  ) => {
     setModal(true);
-    setSelectedProduct(product)
+    setSelectedProduct(product);
+    document.body.classList.add("no-scroll")
+    
   };
 
   const closeModal = () => {
     setModal(false);
+    document.body.classList.remove("no-scroll");
   };
 
   return (
@@ -118,42 +124,54 @@ function App() {
       )}
       {!loading && (
         <>
-          <div>
-            <select value={selectedCategory} onChange={handleFilter}>
-              {categories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-            <select value={sortOption} onChange={handleSortChange}>
-              <option value="None">None</option>
-              <option value="Price: Low to High">Price: Low to High</option>
-              <option value="Price: High to Low">Price: High to Low</option>
-              <option value="Rating: Low to High">Rating: Low to High</option>
-              <option value="Rating: High to Low">Rating: High to Low</option>
-            </select>
+          <div className="header">
+            <h1>Products</h1>
+            <div>
+              <select value={selectedCategory} onChange={handleFilter}>
+                {categories?.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+              <select value={sortOption} onChange={handleSortChange}>
+                <option value="None">None</option>
+                <option value="Price: Low to High">Price: Low to High</option>
+                <option value="Price: High to Low">Price: High to Low</option>
+                <option value="Rating: Low to High">Rating: Low to High</option>
+                <option value="Rating: High to Low">Rating: High to Low</option>
+              </select>
+            </div>
           </div>
 
-          <h1>Products</h1>
           <div className="container">
-            {filteredProducts.map((product: Product) => (
+            {filteredProducts?.map((product: Product) => (
               <div
                 className="product"
                 data-aos="fade-up"
                 data-aos-offset="100"
                 data-aos-duration="500"
-                key={product.id}
-                onClick={() => openModal(product)}
+                key={product?.id}
+                onClick={() => openModal( product)}
               >
-                <Carousel images={product.images} />
-                <h3>{product.title}</h3>
-                <p data-aos="fade-up" data-aos-offset="0" data-aos-duration="1500">
-                  {product.description}
+                <Carousel images={product?.images} />
+                <h3>{product?.title}</h3>
+                <p
+                  data-aos="fade-up"
+                  data-aos-offset="0"
+                  data-aos-duration="1500"
+                >
+                  {product?.description}
                 </p>
                 <p>
-                  ${product.price}
+                  <span>Rating:</span> {product?.rating} / 5
                 </p>
+                <div style={{ display: "flex" }}>
+                  <p style={{ margin: "auto 0" }}>
+                    <span>Price:</span> ${product?.price}
+                  </p>
+                  <Quantity stock={product?.stock} />
+                </div>
               </div>
             ))}
           </div>

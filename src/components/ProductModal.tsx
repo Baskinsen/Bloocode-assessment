@@ -1,6 +1,33 @@
 import Carousel from "./Carousel";
+import Quantity from "./Quantity";
+import React from "react";
 
-const ProductModal = ({ product, onClose }) => {
+interface Product {
+    product: {
+        id: number;
+        name: string;
+        title: string;
+        price: number;
+        description: string;
+        images: string[];
+        category: string;
+        stock: number;
+        rating: number;
+        reviews: [
+          {
+            rating: number;
+            comment: string;
+            date: string;
+            reviewerName: string;
+            reviewerEmail: string;
+          }
+        ];
+      }
+    onClose: () => void;
+    
+}
+
+const ProductModal = ({ product, onClose }: Product) => {
 
    
     console.log(product)
@@ -15,8 +42,15 @@ const ProductModal = ({ product, onClose }) => {
             <div>
               <h2>{product.title}</h2>
               <p>{product.description}</p>
-              <p>Rating: {product.rating} / 5</p>
-              <p>Price: ${product.price}</p>
+              <p>
+                <span>Rating:</span> {product.rating} / 5
+              </p>
+              <div style={{ display: "flex" }}>
+                <p style={{ margin: "auto 0" }}>
+                  <span>Price:</span> ${product?.price}
+                </p>
+                <Quantity stock={product?.stock} />
+              </div>
             </div>
           </div>
           <div className="modal-product-review">
@@ -28,9 +62,11 @@ const ProductModal = ({ product, onClose }) => {
                   <p>{review.reviewerEmail}</p>
                 </div>
                 <div>
-                <h5>Comment</h5>
+                  <h5>Comment</h5>
                   <p>{review.comment}</p>
-                  <p style={{ fontWeight: "bold" }}>Rating: {review.rating} / 5</p>
+                  <p>
+                    <span>Rating:</span> {review.rating} / 5
+                  </p>
                 </div>
               </div>
             ))}
