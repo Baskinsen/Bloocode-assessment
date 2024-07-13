@@ -160,14 +160,24 @@ h1 {
   padding: 15px 30px;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  transition: all 1s ease-in-out;
   scroll-behavior: smooth;
 }
 
 .product:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  transform: scale(1.05);
+  box-shadow: 1 0 5px rgba(0, 0, 0, 0.1);
+  animation: scales 1s ease;
+}
+
+@keyframes scales {
+  
+  from {
+    scale: 1;
+  }
+
+  to {
+    scale: 1.05;
+  }
 }
 
 .product div {

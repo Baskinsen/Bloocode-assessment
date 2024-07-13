@@ -6,18 +6,23 @@ interface Images {
 }
 
 const Carousel = ({ images }: Images) => {
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const goToPrevious = () => {
+  const goToPrevious = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
+    event.stopPropagation();
   };
 
-  const goToNext = () => {
+  const goToNext = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     setCurrentIndex((prevIndex) =>
       prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
+    event.stopPropagation();
   };
 
   return (
@@ -38,14 +43,14 @@ const Carousel = ({ images }: Images) => {
       </div>
       
         <button
-          onClick={goToPrevious}
+          onClick={(event)=> goToPrevious(event)}
           className="carousel-button"
           disabled={currentIndex === 0}
         >
           &#10094;
         </button>
         <button
-          onClick={goToNext}
+          onClick={(event)=> goToNext(event)}
           className="carousel-button"
           disabled={currentIndex === images.length - 1}
         >

@@ -127,6 +127,7 @@ function App() {
           <div className="header">
             <h1>Products</h1>
             <div>
+              <span>Filter by:</span>
               <select value={selectedCategory} onChange={handleFilter}>
                 {categories?.map((category) => (
                   <option key={category} value={category}>
