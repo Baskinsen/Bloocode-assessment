@@ -212,6 +212,7 @@ span {
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  animation: modal 1s ease;
 }
 
 .close {
@@ -303,6 +304,16 @@ span {
       font-size: 16px;
     }
   }
+}
+
+@keyframes modal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+  
 }
 
 
