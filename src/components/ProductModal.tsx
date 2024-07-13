@@ -1,6 +1,6 @@
 import Carousel from "./Carousel";
 import Quantity from "./Quantity";
-import React from "react";
+
 
 interface Product {
     product: {

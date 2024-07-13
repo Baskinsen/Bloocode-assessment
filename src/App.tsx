@@ -3,30 +3,10 @@ import Carousel from "./components/Carousel";
 import Modal from "./components/ProductModal";
 import AOS from "aos";
 import 'aos/dist/aos.css'
-
+import { Product } from "./types/product";
 import "./App.css";
 import Quantity from "./components/Quantity";
 
-interface Product {
-  id: number;
-  name: string;
-  title: string;
-  price: number;
-  description: string;
-  images: string[];
-  category: string;
-  stock: number;
-  rating: number;
-  reviews: [
-    {
-      rating: number;
-      comment: string;
-      date: string;
-      reviewerName: string;
-      reviewerEmail: string;
-    }
-  ];
-}
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const [products, setProducts] = useState<Product[]>([]);
@@ -35,7 +15,7 @@ function App() {
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [sortOption, setSortOption] = useState<string>("None");
   const [modal, setModal] = useState<boolean>(false);
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<Product>({} as Product);
   useEffect(() => {
     AOS.init();
     const fetchData = async () => {
@@ -102,7 +82,19 @@ function App() {
     product: Product
   ) => {
     setModal(true);
-    setSelectedProduct(product);
+    setSelectedProduct({
+          id: product?.id,
+        name: product?.name,
+        title: product?.title,
+        price: product?.price,
+        description: product?.description,
+        images: product?.images,
+        category: product?.category,
+        stock: product?.stock,
+        rating: product?.rating,
+        reviews: [...product.reviews],
+        
+    } as Product);
     document.body.classList.add("no-scroll")
     
   };
